@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'me.champeau.jmh' version '0.6.8'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.httpcomponents.core5:httpcore5:5.2.1'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.16'
+    implementation 'org.openjdk.jmh:jmh-core:1.36'
+    annotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.36'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+jmh {
+    fork.set(1)
+    warmup.set("1s")
+    warmupIterations.set(1)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass.set("org.example.Main")
+}
